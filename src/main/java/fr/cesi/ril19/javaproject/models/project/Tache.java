@@ -1,5 +1,6 @@
 package fr.cesi.ril19.javaproject.models.project;
 
+import fr.cesi.ril19.javaproject.models.users.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,4 +28,12 @@ public class Tache {
     @Column(name = "duration")
     private int duration;
 
+    private User user;
+
+
+    public Tache(String num, int hourCost, int duration){
+        this.num = num;
+        this.hourCost = hourCost;
+        this.duration =duration;
+    }
 }

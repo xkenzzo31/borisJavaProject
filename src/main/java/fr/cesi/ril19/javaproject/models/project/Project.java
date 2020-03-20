@@ -11,6 +11,7 @@ import javax.persistence.*;
 import javax.websocket.OnError;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Set;
 
 @Setter
 @Getter
@@ -36,5 +37,6 @@ public class Project {
     private long startDate;
     @Column(name = "workdays")
     private int workDays;
-
+    @OneToMany
+    private Set<Tache> taches;
 }
