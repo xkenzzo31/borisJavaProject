@@ -9,7 +9,8 @@ import fr.cesi.ril19.javaproject.services.ObjectJsonParser;
 import fr.cesi.ril19.javaproject.services.ProjectService;
 import fr.cesi.ril19.javaproject.services.TacheService;
 import fr.cesi.ril19.javaproject.services.UserService;
-import jdk.internal.jline.internal.Preconditions;
+
+import jline.internal.Preconditions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +19,12 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.*;
-import java.util.*;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 @RestController // Controller + ResponseBody
 @RequestMapping("/api/v1/project")
@@ -121,6 +126,7 @@ public class ProjectController {
         List<Project> lp = projectService.getProjects();
 
         for (Tache task : lt) {
+            System.out.println(lu.size());
             task.setUser(lu.get(new Random().nextInt(lu.size())));
             task.setProject(lp.get(new Random().nextInt(lp.size())));
         }
@@ -129,7 +135,7 @@ public class ProjectController {
 
     // POST /import
     @RequestMapping(value = "/import", method = RequestMethod.POST)
-    public ResponseEntity<Project> postProject(@ModelAttribute("Project") Project Project) {
+    public ResponseEntity<Project> postProject(@RequestBody Project Project) {
         Preconditions.checkNotNull(Project);
         return new ResponseEntity<Project>(this.projectService.saveProject(Project), HttpStatus.CREATED);
     }

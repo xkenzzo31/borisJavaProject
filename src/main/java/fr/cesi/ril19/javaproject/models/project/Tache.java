@@ -14,12 +14,14 @@ import java.util.Collection;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
 @Table(name = "tache")
 public class Tache {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idtache")
     private int id;
-    @ManyToOne
+    @ManyToOne()
     private Project project;
     @Column(name = "num")
     private String num;
@@ -27,7 +29,7 @@ public class Tache {
     private int hourCost;
     @Column(name = "duration")
     private int duration;
-
+    @ManyToOne
     private User user;
 
 
@@ -36,4 +38,7 @@ public class Tache {
         this.hourCost = hourCost;
         this.duration =duration;
     }
+
+
+
 }

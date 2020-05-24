@@ -14,8 +14,8 @@ import java.util.List;
 public interface TacheRepository extends CrudRepository<Tache, Integer> {
 
     // findBy <=> Select from contacts where lastname
-    List<Tache> findByUser(User u);
-    List<Tache> findByIdprojet(Project u);
+    List<Tache> findByUserId(User u);
+    List<Tache> findByProject(Project idproject);
 
     @Query("select sum(duration)/7 from Tache group by project")
     String getTotalDays();

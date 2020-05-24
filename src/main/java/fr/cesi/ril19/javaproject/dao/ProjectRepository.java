@@ -12,7 +12,6 @@ import java.util.List;
 
 @Repository
 public interface ProjectRepository extends CrudRepository<Project, Integer> {
-    User findByid(Integer id);
 
     @Query("SELECT distinct(a) FROM Project a WHERE a.title like %:word% or a.description like %:word% order by a.budget desc")
     List<Project> findByWord(@Param("word") String word);

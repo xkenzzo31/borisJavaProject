@@ -25,12 +25,12 @@ public class TacheService {
         return (List<Tache>) this.taskRepo.findAll();
     }
 
-    public List<Tache> findTasksByUser(User u){
-        return  taskRepo.findByUser(u);
+    public List<Tache> findTasksByUserId(User u){
+        return  taskRepo.findByUserId(u);
     }
 
     public List<Tache> findTasksByProject(Project p){
-        return  taskRepo.findByIdprojet(p);
+        return  taskRepo.findByProject(p);
     }
 
     public String saveMultipleTasks(List<Tache> lu) {

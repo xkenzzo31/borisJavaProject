@@ -5,7 +5,7 @@ import fr.cesi.ril19.javaproject.models.users.User;
 import fr.cesi.ril19.javaproject.services.ObjectJsonParser;
 import fr.cesi.ril19.javaproject.services.TacheService;
 import fr.cesi.ril19.javaproject.services.UserService;
-import jdk.internal.jline.internal.Preconditions;
+import jline.internal.Preconditions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -43,7 +43,7 @@ public class UserController {
 
     @RequestMapping("/{id}/task")
     public ResponseEntity<?> getUsertask(@PathVariable Integer id) {
-        List<Tache> tasks= this.taskService.findTasksByUser(getUserById(id));
+        List<Tache> tasks= this.taskService.findTasksByUserId(getUserById(id));
         if (tasks.isEmpty()) {
             return new ResponseEntity<String>("No Tasks found for this user, you may want to synchronize the projects", HttpStatus.OK);
         }else{
@@ -53,7 +53,8 @@ public class UserController {
     }
 
     @RequestMapping(value = "/import", method = RequestMethod.POST)
-    public ResponseEntity<User> postUser(@ModelAttribute("user") User user) {
+    public ResponseEntity<User> postUser(@RequestBody User user) {
+        System.out.println(user.getFirstname());
         Preconditions.checkNotNull(user);
         return new ResponseEntity<User>(this.userService.saveUser(user), HttpStatus.CREATED);
     }

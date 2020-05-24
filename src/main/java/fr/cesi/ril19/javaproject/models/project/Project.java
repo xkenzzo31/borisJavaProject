@@ -21,14 +21,13 @@ import java.util.Set;
 @Table(name = "project")
 public class Project {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false,updatable = false)
     private int id;
     @Column(name = "title")
     private String title;
     @Column(name = "description")
     private String description;
-    @Column(name = "mode")
-    private String mode;
     @OneToMany
     private Collection<User> users;
     @Column(name = "budget")
